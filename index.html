@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Studio Developer Hub - Skriptlar, Plaginlar va Darsliklar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-cube logo-icon"></i>
+                <span>Roblox Studio<span class="highlight">Hub</span></span>
+            </a>
+            <nav class="nav-links">
+                <a href="#hero"><i class="fa-solid fa-house"></i> Bosh sahifa</a>
+                <a href="#generator"><i class="fa-solid fa-code"></i> Skript Generator</a>
+                <a href="#scripts"><i class="fa-solid fa-scroll"></i> Tayyor Skriptlar</a>
+                <a href="#instructions"><i class="fa-solid fa-list-check"></i> Instruksiya</a>
+                <a href="#tutorials"><i class="fa-solid fa-graduation-cap"></i> Darsliklar</a>
+            </nav>
+            <div class="nav-actions">
+                <button class="theme-toggle-btn" onclick="toggleTheme()" title="Oq / Qora rejim">
+                    <i class="fa-solid fa-sun" id="themeIcon"></i>
+                </button>
+                <button class="btn btn-primary" onclick="scrollToSection('generator')">
+                    <i class="fa-solid fa-bolt"></i> Skript Yaratish
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-background"></div>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Roblox Studio Devoloper Platformasi</div>
+                <h1>O'z Roblox O'yiningizni <br><span class="gradient-text">Professional Darajada</span> Yaratings</h1>
+                <p>Double Jump (Ikki karra sakrash), Tez yugurish (Sprint), Qiziqarli Parkour mexanikalari va tayyor Luau generatorlari barchasi shu yerda!</p>
+                <div class="hero-btns">
+                    <a href="#generator" class="btn btn-gradient"><i class="fa-solid fa-wand-magic-sparkles"></i> Generatorni Sinash</a>
+                    <a href="#instructions" class="btn btn-outline"><i class="fa-solid fa-book"></i> Qo'llanma & Instruksiya</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-num">50+</span>
+                        <span class="stat-desc">Tayyor Skriptlar</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">100%</span>
+                        <span class="stat-desc">Bepul & Xavfsiz</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">Luau</span>
+                        <span class="stat-desc">Optimallashtirilgan Kod</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-card">
+                <div class="code-window">
+                    <div class="window-header">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="window-title">StarterPlayerScripts.DoubleJump.luau</span>
+                    </div>
+                    <div class="window-body">
+                        <pre><code class="language-lua"><span class="token-keyword">local</span> UserInputService = game:<span class="token-function">GetService</span>(<span class="token-string">"UserInputService"</span>)
+<span class="token-keyword">local</span> player = game.Players.LocalPlayer
+<span class="token-keyword">local</span> humanoid = player.Character:WaitForChild(<span class="token-string">"Humanoid"</span>)
+
+-- Double Jump (Ikki karra sakrash)
+UserInputService.JumpRequest:<span class="token-function">Connect</span>(<span class="token-keyword">function</span>()
+    <span class="token-keyword">if</span> canDoubleJump <span class="token-keyword">then</span>
+        humanoid.JumpPower = <span class="token-number">65</span>
+        humanoid:<span class="token-function">ChangeState</span>(Enum.HumanoidStateType.Jumping)
+    <span class="token-keyword">end</span>
+<span class="token-keyword">end</span>)</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Script Generator Section -->
+    <section id="generator" class="section generator-section">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2><i class="fa-solid fa-code-square"></i> Interaktiv Roblox Skript Generator</h2>
+                <p>Kerakli skriptni tanlang, parametrlarni kiriting va tayyor Luau kodini nusxalang!</p>
+            </div>
+
+            <div class="generator-grid">
+                <div class="generator-controls card">
+                    <h3><i class="fa-solid fa-sliders"></i> Parametrlarni Tanlang</h3>
+                    
+                    <div class="form-group">
+                        <label for="scriptType">Skript Turi:</label>
+                        <select id="scriptType" class="form-control" onchange="updateGeneratorFields()">
+                            <optgroup label="💎 VIP Parkour Paketi (Qaytarilmas Kodlar)">
+                                <option value="vip1">$1 Tarif: VIP Parkour Batut & Sound (10 qator kod)</option>
+                                <option value="vip5">$5 Tarif: VIP Parkour Pro 5-ta Mexanika (50 qator kod)</option>
+                                <option value="vip100">$100 Tarif: VIP Parkour Ultimate Master & DataStore (100 qator kod)</option>
+                            </optgroup>
+                            <optgroup label="🎮 Harakat Skriptlari (Movement)">
+                                <option value="doublejump" selected>Double Jump (Ikki karra sakrash)</option>
+                                <option value="sprint">Shift Sprint (Tez Yugurish & FOV)</option>
+                                <option value="dash">Q Dash / Dodge Roll (Otilish kodi)</option>
+                                <option value="speedBoost">Speed Boost Part (Tezlashtiruvchi Blok)</option>
+                            </optgroup>
+                            <optgroup label="🧗 Parkour & Obby Skriptlari">
+                                <option value="jumppad">Parkour Batut (Baland Jump Pad)</option>
+                                <option value="disappearing">Yo'qoluvchi Platforma (Disappearing Block)</option>
+                                <option value="killBrick">Kill Brick (Tegsa o'ldiradigan Lava)</option>
+                                <option value="teleport">Teleport Part (Boshqa joyga ko'chirish)</option>
+                            </optgroup>
+                            <optgroup label="⚔️ Urush & Mexanika Skriptlari">
+                                <option value="raycastgun">Raycast Gun (Qurol Otish kodi)</option>
+                                <option value="ragdoll">Ragdoll On Death (Yiqilish kodi)</option>
+                                <option value="petfollow">Pet Follow System (Ergashtiruvchi Pet)</option>
+                            </optgroup>
+                            <optgroup label="💾 Sistema Skriptlari">
+                                <option value="xpstats">XP & Level System (Daraja oshirish)</option>
+                                <option value="leaderstats">Leaderstats (Tanga & Ballar sistemasi)</option>
+                                <option value="dayNight">Kun va Tun Sikli (Day/Night Cycle)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div id="dynamicFields">
+                        <!-- Dynamic fields will be injected here by JS -->
+                    </div>
+
+                    <button class="btn btn-primary w-100" onclick="onGenerateButtonClick()">
+                        <i class="fa-solid fa-gears"></i> Skript Yaratish
+                    </button>
+                </div>
+
+                <div class="generator-output card">
+                    <div class="output-header">
+                        <h3><i class="fa-solid fa-file-code"></i> Hosil bo'lgan Luau Kobi</h3>
+                        <button class="btn btn-sm btn-outline" id="copyBtn" onclick="copyGeneratedScript()">
+                            <i class="fa-regular fa-copy"></i> Nusxalash
+                        </button>
+                    </div>
+                    <div class="code-preview-container">
+                        <pre><code id="generatedCode" class="language-lua">-- Skript yaratish tugmasini bosing...</code></pre>
+                    </div>
+                    <div class="script-instruction">
+                        <i class="fa-solid fa-circle-info"></i> <span id="scriptInstructionText">Skriptni Roblox Studio'dagi **StarterPlayerScripts** ichiga joylashtiring.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ready Scripts Gallery -->
+    <section id="scripts" class="section scripts-section bg-alt">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fa-solid fa-boxes-stacked"></i> Mashhur Roblox & Parkour Skriptlar</h2>
+                <p>O'yiningizni yanada qiziqarli qilish uchun maxsus yaratilgan optimallashtirilgan kodlar</p>
+            </div>
+
+            <div class="scripts-grid">
+                <!-- Card Double Jump -->
+                <div class="script-card card">
+                    <div class="card-badge">Local Script</div>
+                    <h3><i class="fa-solid fa-person-running"></i> Double Jump (Ikki Karra Sakrash)</h3>
+                    <p>O'yinchi havodaligida yana bir marta sakrashiga imkon beruvchi chiroyli harakat kodi.</p>
+                    <div class="code-snippet-box">
+                        <code>UserInputService.JumpRequest:Connect(...)</code>
+                    </div>
+                    <div class="card-footer">
+                        <span class="difficulty easy"><i class="fa-solid fa-signal"></i> Oson</span>
+                        <button class="btn btn-sm btn-outline" onclick="openScriptModal('doublejump')">Kodni Ko'rish</button>
+                    </div>
+                </div>
+
+                <!-- Card Shift Sprint -->
+                <div class="script-card card">
+                    <div class="card-badge">Local Script</div>
+                    <h3><i class="fa-solid fa-bolt"></i> Shift Sprint & FOV Effekti</h3>
+                    <p>LeftShift tugmasi bosilganda tezlikni oshiradi va kamerani chiroyli masofalashtiradi.</p>
+                    <div class="code-snippet-box">
+                        <code>humanoid.WalkSpeed = SPRINT_SPEED</code>
+                    </div>
+                    <div class="card-footer">
+                        <span class="difficulty easy"><i class="fa-solid fa-signal"></i> Oson</span>
+                        <button class="btn btn-sm btn-outline" onclick="openScriptModal('sprint')">Kodni Ko'rish</button>
+                    </div>
+                </div>
+
+                <!-- Card Q Dash -->
+                <div class="script-card card">
+                    <div class="card-badge">Local Script</div>
+                    <h3><i class="fa-solid fa-wind"></i> Q Dash / Dodge Roll</h3>
+                    <p>Q tugmasi bosilganda o'yinchini harakat yo'nalishiga qarab ildam otib beradi.</p>
+                    <div class="code-snippet-box">
+                        <code>bv.Velocity = moveDir * DASH_POWER</code>
+                    </div>
+                    <div class="card-footer">
+                        <span class="difficulty medium"><i class="fa-solid fa-signal"></i> O'rta</span>
+                        <button class="btn btn-sm btn-outline" onclick="openScriptModal('dash')">Kodni Ko'rish</button>
+                    </div>
+                </div>
+
+                <!-- Card Pet Follow -->
+                <div class="script-card card">
+                    <div class="card-badge">Server Script</div>
+                    <h3><i class="fa-solid fa-dog"></i> Pet Follow System</h3>
+                    <p>O'yinchi bilan birga yonida uchib/yurib ergashtiruvchi jonzot (Pet) kodi.</p>
+                    <div class="code-snippet-box">
+                        <code>alignPos.Position = targetHrp.CFrame * offset</code>
+                    </div>
+                    <div class="card-footer">
+                        <span class="difficulty medium"><i class="fa-solid fa-signal"></i> O'rta</span>
+                        <button class="btn btn-sm btn-outline" onclick="openScriptModal('petfollow')">Kodni Ko'rish</button>
+                    </div>
+                </div>
+
+                <!-- Card Ragdoll -->
+                <div class="script-card card">
+                    <div class="card-badge">Server Script</div>
+                    <h3><i class="fa-solid fa-skull"></i> Ragdoll On Death</h3>
+                    <p>O'yinchi o'lganda suyak va bo'g'inlari chiroyli lat yeb yiqilish effekti kodi.</p>
+                    <div class="code-snippet-box">
+                        <code>makeRagdoll(character)</code>
+                    </div>
+                    <div class="card-footer">
+                        <span class="difficulty medium"><i class="fa-solid fa-signal"></i> O'rta</span>
+                        <button class="btn btn-sm btn-outline" onclick="openScriptModal('ragdoll')">Kodni Ko'rish</button>
+                    </div>
+                </div>
+
+                <!-- Card XP & Level -->
+                <div class="script-card card">
+                    <div class="card-badge">Server Script</div>
+                    <h3><i class="fa-solid fa-star"></i> XP & Level Up System</h3>
+                    <p>O'yinchiga tajriba (XP) to'planganda avtomatik darajasini (Level) oshirish kodi.</p>
+                    <div class="code-snippet-box">
+                        <code>level.Value = level.Value + 1</code>
+                    </div>
+                    <div class="card-footer">
+                        <span class="difficulty easy"><i class="fa-solid fa-signal"></i> Oson</span>
+                        <button class="btn btn-sm btn-outline" onclick="openScriptModal('xpstats')">Kodni Ko'rish</button>
+                    </div>
+                </div>
+
+                <!-- Card Raycast Gun -->
+                <div class="script-card card">
+                    <div class="card-badge">Local Script</div>
+                    <h3><i class="fa-solid fa-gun"></i> Raycast Laser Gun</h3>
+                    <p>Sichqoncha bilan mo'ljalga otuvchi va zarar yetkazuvchi lazer qurol kodi.</p>
+                    <div class="code-snippet-box">
+                        <code>workspace:Raycast(origin, direction, ...)</code>
+                    </div>
+                    <div class="card-footer">
+                        <span class="difficulty hard"><i class="fa-solid fa-signal"></i> Qiyin</span>
+                        <button class="btn btn-sm btn-outline" onclick="openScriptModal('raycastgun')">Kodni Ko'rish</button>
+                    </div>
+                </div>
+
+                <!-- Card Parkour Jump Pad -->
+                <div class="script-card card">
+                    <div class="card-badge">Server Script</div>
+                    <h3><i class="fa-solid fa-arrows-up-to-line"></i> Parkour Batut (Jump Pad)</h3>
+                    <p>O'yinchi ushbu blok ustiga qadamsa, uni balandga otdirib yuboradigan batut kodi.</p>
+                    <div class="code-snippet-box">
+                        <code>hrp.Velocity = Vector3.new(0, 130, 0)</code>
+                    </div>
+                    <div class="card-footer">
+                        <span class="difficulty easy"><i class="fa-solid fa-signal"></i> Oson</span>
+                        <button class="btn btn-sm btn-outline" onclick="openScriptModal('jumppad')">Kodni Ko'rish</button>
+                    </div>
+                </div>
+
+                <!-- Card Disappearing Block -->
+                <div class="script-card card">
+                    <div class="card-badge">Server Script</div>
+                    <h3><i class="fa-solid fa-eye-slash"></i> Parkour Yo'qoluvchi Platforma</h3>
+                    <p>Tegilgandan 0.5 soniya o'tib yo'qoladigan va keyin qayta tiklanadigan parkour blok kodi.</p>
+                    <div class="code-snippet-box">
+                        <code>platform.Transparency = 1; platform.CanCollide = false</code>
+                    </div>
+                    <div class="card-footer">
+                        <span class="difficulty medium"><i class="fa-solid fa-signal"></i> O'rta</span>
+                        <button class="btn btn-sm btn-outline" onclick="openScriptModal('disappearing')">Kodni Ko'rish</button>
+                    </div>
+                </div>
+
+                <!-- Card Parkour Checkpoint -->
+                <div class="script-card card">
+                    <div class="card-badge">Server Script</div>
+                    <h3><i class="fa-solid fa-flag"></i> Parkour Checkpoint Sistemasi</h3>
+                    <p>O'yinchi yiqilib o'lsa, uni eng oxirgi bosib o'tgan bayroqchasiga (stage) qaytarish kodi.</p>
+                    <div class="code-snippet-box">
+                        <code>hrp.CFrame = stagePart.CFrame + Vector3.new(0, 3, 0)</code>
+                    </div>
+                    <div class="card-footer">
+                        <span class="difficulty medium"><i class="fa-solid fa-signal"></i> O'rta</span>
+                        <button class="btn btn-sm btn-outline" onclick="openScriptModal('checkpoint')">Kodni Ko'rish</button>
+                    </div>
+                </div>
+
+                <!-- Card DataStore -->
+                <div class="script-card card">
+                    <div class="card-badge">Server Script</div>
+                    <h3><i class="fa-solid fa-database"></i> DataStore (Natijalarni Saqlash)</h3>
+                    <p>O'yinchining tangalari va darajasini o'yindan chiqib ketganda ham saqlab qolish kodi.</p>
+                    <div class="code-snippet-box">
+                        <code>game.Players.PlayerRemoving:Connect(...)</code>
+                    </div>
+                    <div class="card-footer">
+                        <span class="difficulty easy"><i class="fa-solid fa-signal"></i> Oson</span>
+                        <button class="btn btn-sm btn-outline" onclick="openScriptModal('datastore')">Kodni Ko'rish</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIP Parkour Pricing Section -->
+    <section id="pricing" class="section pricing-section">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2><i class="fa-solid fa-gem"></i> VIP Parkour Tariflari & Unikal Skriptlar</h2>
+                <p>Har bir tarif uchun tayyorlangan qaytarilmas (takrorlanmas) professional Parkour Luau kodlari</p>
+            </div>
+
+            <div class="pricing-grid grid-3">
+                <!-- $1 Tarif Card -->
+                <div class="pricing-card card">
+                    <div class="pricing-badge">$1 VIP Pack</div>
+                    <div class="price">$1 <span>/ bir marta</span></div>
+                    <h3>1-ta VIP Parkour Skripti</h3>
+                    <p class="pricing-desc">10 qator unikal, qaytarilmas Luau kodi. Trampoline Jump Boost + Sound effekti.</p>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> 10 qator to'liq qaytarilmas kod</li>
+                        <li><i class="fa-solid fa-check"></i> Jump Pad & Ovoz effekti</li>
+                        <li><i class="fa-solid fa-check"></i> Tezkor o'rnatish yo'riqnomasi</li>
+                    </ul>
+                    <button class="btn btn-primary w-100" onclick="openScriptModal('vip1')">
+                        <i class="fa-solid fa-code"></i> $1 Kodni Ko'rish (10 Qator)
+                    </button>
+                </div>
+
+                <!-- $5 Tarif Card -->
+                <div class="pricing-card card featured">
+                    <div class="pricing-badge hot">Eng Ommabop</div>
+                    <div class="price">$5 <span>/ bir marta</span></div>
+                    <h3>5-ta VIP Parkour Pro Pack</h3>
+                    <p class="pricing-desc">50 qator unikal, qaytarilmas Luau kodi. 5 xil har xil parkour tuzoqlari va mexanikalari!</p>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> 50 qator to'liq qaytarilmas kod</li>
+                        <li><i class="fa-solid fa-check"></i> 5 ta unikal mexanika (Moving, Fire, Speed Ring)</li>
+                        <li><i class="fa-solid fa-check"></i> Falling Pillar Trap & Checkpoint Flag</li>
+                    </ul>
+                    <button class="btn btn-gradient w-100" onclick="openScriptModal('vip5')">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> $5 Kodni Ko'rish (50 Qator)
+                    </button>
+                </div>
+
+                <!-- $100 Tarif Card -->
+                <div class="pricing-card card">
+                    <div class="pricing-badge master">Master Pack</div>
+                    <div class="price">$100 <span>/ bir marta</span></div>
+                    <h3>100-ta Ultimate Parkour Pack</h3>
+                    <p class="pricing-desc">100 qator mukammal, qaytarilmas professional Parkour + DataStore Auto-Save va Anti-Cheat kodi.</p>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> 100 qator murakkab qaytarilmas kod</li>
+                        <li><i class="fa-solid fa-check"></i> Stage & Coins DataStore Auto-Save</li>
+                        <li><i class="fa-solid fa-check"></i> Anti-Cheat Anti-Fly & Speed Enforcement</li>
+                        <li><i class="fa-solid fa-check"></i> Rotating Laser Beams Engine</li>
+                    </ul>
+                    <button class="btn btn-primary w-100" onclick="openScriptModal('vip100')">
+                        <i class="fa-solid fa-crown"></i> $100 Kodni Ko'rish (100 Qator)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Instruction Section -->
+    <section id="instructions" class="section instructions-section">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2><i class="fa-solid fa-list-check"></i> Roblox Studio'da Skriptlarni Joylashtirish Instruksiyasi</h2>
+                <p>Skriptlarni to'g'ri joylashtirish bo'yicha qadamba-qadam yo'riqnoma</p>
+            </div>
+
+            <div class="instruction-steps grid grid-3">
+                <div class="step-card card">
+                    <div class="step-number">1</div>
+                    <h3><i class="fa-solid fa-folder-tree"></i> Explorer Oynasini Ochish</h3>
+                    <p>Roblox Studio'da tepadan <strong>View</strong> menyusiga o'ting va <strong>Explorer</strong> hamda <strong>Properties</strong> oynalarini yoqing.</p>
+                </div>
+
+                <div class="step-card card">
+                    <div class="step-number">2</div>
+                    <h3><i class="fa-solid fa-plus"></i> Skript Turi bo'yicha Qo'shish</h3>
+                    <p>
+                        • <strong>Double Jump & Shift Sprint:</strong> <code>StarterPlayer</code> -> <code>StarterPlayerScripts</code> ichiga <strong>LocalScript</strong> qilib qo'shing.<br>
+                        • <strong>Parkour Batut & Disappearing Block:</strong> Kerakli <code>Part</code> bloki ichiga <strong>Script</strong> qilib qo'shing.<br>
+                        • <strong>Leaderstats & DataStore:</strong> <code>ServerScriptService</code> ichiga <strong>Script</strong> qilib qo'shing.
+                    </p>
+                </div>
+
+                <div class="step-card card">
+                    <div class="step-number">3</div>
+                    <h3><i class="fa-solid fa-circle-play"></i> Sinash (Play Test)</h3>
+                    <p>Tepadagi <strong>Play (F5)</strong> tugmasini bosing va o'yinda <code>Shift</code> tugmasini bosib yugurib, havodaligingizda <code>Space</code> bosib ikki marta sakrang!</p>
+                </div>
+            </div>
+
+            <!-- Full Combined Code Block -->
+            <div class="full-code-container card" style="margin-top: 40px;">
+                <div class="output-header">
+                    <h3><i class="fa-solid fa-code"></i> Barcha Skriptlar Jamlanmasi (Paste & Play)</h3>
+                    <button class="btn btn-sm btn-outline" onclick="copyFullCombinedCode()">
+                        <i class="fa-regular fa-copy"></i> Barchasini Nusxalash
+                    </button>
+                </div>
+                <div class="code-preview-container" style="max-height: 400px;">
+                    <pre><code id="fullCombinedCode" class="language-lua">-- =======================================================
+-- 1. DOUBLE JUMP + SHIFT SPRINT (StarterPlayerScripts -> LocalScript)
+-- =======================================================
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
+
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local camera = workspace.CurrentCamera
+
+-- Double Jump parametrlari
+local canDoubleJump = false
+local hasDoubleJumped = false
+local DOUBLE_JUMP_POWER = 65
+
+humanoid.StateChanged:Connect(function(oldState, newState)
+    if newState == Enum.HumanoidStateType.Landed then
+        canDoubleJump = false
+        hasDoubleJumped = false
+    elseif newState == Enum.HumanoidStateType.Freefall then
+        task.wait(0.1)
+        if not hasDoubleJumped then
+            canDoubleJump = true
+        end
+    end
+end)
+
+UserInputService.JumpRequest:Connect(function()
+    if canDoubleJump and not hasDoubleJumped then
+        hasDoubleJumped = true
+        canDoubleJump = false
+        humanoid.JumpPower = DOUBLE_JUMP_POWER
+        humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+    end
+end)
+
+-- Shift Sprint parametrlari
+local SPRINT_SPEED = 35
+local SPRINT_FOV = 85
+local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+
+UserInputService.InputBegan:Connect(function(input, gpe)
+    if gpe then return end
+    if input.KeyCode == Enum.KeyCode.LeftShift then
+        humanoid.WalkSpeed = SPRINT_SPEED
+        TweenService:Create(camera, tweenInfo, {FieldOfView = SPRINT_FOV}):Play()
+    end
+end)
+
+UserInputService.InputEnded:Connect(function(input, gpe)
+    if input.KeyCode == Enum.KeyCode.LeftShift then
+        humanoid.WalkSpeed = 16
+        TweenService:Create(camera, tweenInfo, {FieldOfView = 70}):Play()
+    end
+end)
+
+
+-- =======================================================
+-- 2. PARKOUR JUMP PAD (Part -> Script)
+-- =======================================================
+--[[
+local pad = script.Parent
+pad.Touched:Connect(function(hit)
+    local hrp = hit.Parent:FindFirstChild("HumanoidRootPart")
+    if hrp then
+        hrp.Velocity = Vector3.new(hrp.Velocity.X, 130, hrp.Velocity.Z)
+    end
+end)
+--]]
+
+
+-- =======================================================
+-- 3. PARKOUR YO'QOLUVCHI PLATFORMA (Part -> Script)
+-- =======================================================
+--[[
+local platform = script.Parent
+local isTouched = false
+
+platform.Touched:Connect(function(hit)
+    local humanoid = hit.Parent:FindFirstChildWhichIsA("Humanoid")
+    if humanoid and not isTouched then
+        isTouched = true
+        task.wait(0.5)
+        platform.Transparency = 1
+        platform.CanCollide = false
+        task.wait(3)
+        platform.Transparency = 0
+        platform.CanCollide = true
+        isTouched = false
+    end
+end)
+--]]</code></pre>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Recommended Plugins -->
+    <section id="plugins" class="section plugins-section">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2><i class="fa-solid fa-plug-circle-bolt"></i> Roblox Studio Muhim Plaginlari</h2>
+                <p>Ish unumdorligingizni 10 baravarga oshiruvchi eng kerakli Studio vositalari</p>
+            </div>
+
+            <div class="plugins-grid">
+                <div class="plugin-card card">
+                    <div class="plugin-icon"><i class="fa-solid fa-hammer"></i></div>
+                    <h3>Building Tools by F3X</h3>
+                    <p>O'yin xaritasini qurishda obyektlarni tezkor va aniq shakllantirish uchun eng mashhur plagin.</p>
+                    <a href="https://create.roblox.com/store/asset/142782395/Building-Tools-by-F3X" target="_blank" class="btn btn-sm btn-primary">Olish <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+
+                <div class="plugin-card card">
+                    <div class="plugin-icon"><i class="fa-solid fa-film"></i></div>
+                    <h3>Moon Animator 2</h3>
+                    <p>Professional darajadagi 3D animatsiyalar, cutscene va obyekt harakatlarini yaratish plagini.</p>
+                    <a href="https://create.roblox.com/store/asset/4725618216/Moon-Animator-2" target="_blank" class="btn btn-sm btn-primary">Olish <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+
+                <div class="plugin-card card">
+                    <div class="plugin-icon"><i class="fa-solid fa-vector-square"></i></div>
+                    <h3>UI Corner & AutoScale</h3>
+                    <p>Interface (UI) barcha ekran va telefonlarda bir xil tekis va chiroyli ko'rinishini ta'minlaydi.</p>
+                    <a href="https://create.roblox.com/store/asset/1496745047/AutoScale-Lite" target="_blank" class="btn btn-sm btn-primary">Olish <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tutorials Section -->
+    <section id="tutorials" class="section tutorials-section bg-alt">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fa-solid fa-book-open-reader"></i> Roblox Studio Darsliklari</h2>
+                <p>Noldan boshlab o'z o'yiningizni yaratishgacha bo'lgan qadamlar</p>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item card active">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span><i class="fa-solid fa-play"></i> 1-Dars: Double Jump va Sprint skriptlarini qayerga qo'yish kerak?</span>
+                        <i class="fa-solid fa-chevron-down arrow"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Harakatga (Jump, Sprint, FOV) tegishli skriptlar har doim <strong>LocalScript</strong> bo'lishi va Roblox Studio'dagi <strong>StarterPlayer -> StarterPlayerScripts</strong> jildining ichiga joylashtirilishi shart!</p>
+                        
+                        <div class="code-preview-container" style="margin-top: 14px;">
+                            <pre><code class="language-lua">-- StarterPlayer -> StarterPlayerScripts -> MovementScript (LocalScript)
+local UserInputService = game:GetService("UserInputService")
+local player = game.Players.LocalPlayer
+local humanoid = player.Character:WaitForChild("Humanoid")
+
+-- LeftShift bosilganda tez yugurish
+UserInputService.InputBegan:Connect(function(input, gpe)
+    if not gpe and input.KeyCode == Enum.KeyCode.LeftShift then
+        humanoid.WalkSpeed = 35
+    end
+end)
+
+UserInputService.InputEnded:Connect(function(input, gpe)
+    if input.KeyCode == Enum.KeyCode.LeftShift then
+        humanoid.WalkSpeed = 16
+    end
+end)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item card">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span><i class="fa-solid fa-play"></i> 2-Dars: Parkour Obby bosqichlarini qanday yaratish kerak?</span>
+                        <i class="fa-solid fa-chevron-down arrow"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Qiziqarli Parkour yaratish uchun batut (Jump Pad), yo'qolib qoluvchi bloklar va Checkpoint (bosqich bayroqchalari) sistemasi bilan Lava bloki uyg'unlashtiriladi. Har bir blok ichiga mos ravishda tayyor generator skriptlarini joylashtiring.</p>
+
+                        <div class="code-preview-container" style="margin-top: 14px;">
+                            <pre><code class="language-lua">-- Parkour Batut (Part -> Script)
+local pad = script.Parent
+pad.Touched:Connect(function(hit)
+    local hrp = hit.Parent:FindFirstChild("HumanoidRootPart")
+    if hrp then
+        hrp.Velocity = Vector3.new(hrp.Velocity.X, 130, hrp.Velocity.Z) -- Balandga otadi
+    end
+end)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item card">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span><i class="fa-solid fa-play"></i> 3-Dars: Touch hodisasi nima (Part.Touched)?</span>
+                        <i class="fa-solid fa-chevron-down arrow"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Roblox Studio'da har qanday blok (Part) bilan o'yinchi to'qnashganda <code>Part.Touched</code> hodisasi ishga tushadi. Parkour tuzoqlari va teleportlar aynan shu orqali ishlaydi.</p>
+
+                        <div class="code-preview-container" style="margin-top: 14px;">
+                            <pre><code class="language-lua">-- Blok Touch hodisasini tekshirish kodi (Part -> Script)
+local part = script.Parent
+
+part.Touched:Connect(function(hit)
+    print("Blokga nimadir tegdi: " .. hit.Name)
+    local character = hit.Parent
+    local humanoid = character:FindFirstChildWhichIsA("Humanoid")
+    if humanoid then
+        print(character.Name .. " o'yinchisi blok ustiga qadadi!")
+    end
+end)</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <i class="fa-solid fa-cube logo-icon"></i>
+                    <span>Roblox Studio<span class="highlight">Hub</span></span>
+                </a>
+                <p>Roblox koinotida o'z o meyorlaringizni yaratishingiz uchun yaratilgan maxsus platforma.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Tezkor Havolalar</h4>
+                <a href="#hero">Bosh sahifa</a>
+                <a href="#generator">Generator</a>
+                <a href="#scripts">Skriptlar</a>
+                <a href="#instructions">Instruksiya</a>
+            </div>
+            <div class="footer-social">
+                <h4>Roblox Hamjamiyati</h4>
+                <div class="social-icons">
+                    <a href="https://create.roblox.com" target="_blank"><i class="fa-solid fa-globe"></i></a>
+                    <a href="https://devforum.roblox.com" target="_blank"><i class="fa-brands fa-discourse"></i></a>
+                    <a href="https://youtube.com" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 Roblox Studio Developer Hub. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+
+    <!-- Script Modal -->
+    <div id="scriptModal" class="modal">
+        <div class="modal-content card">
+            <div class="modal-header">
+                <h3 id="modalTitle">Skript Kodu</h3>
+                <span class="close-btn" onclick="closeScriptModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <pre><code id="modalCode" class="language-lua">-- Loading code...</code></pre>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="copyModalScript()"><i class="fa-regular fa-copy"></i> Kodni Nusxalash</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
